@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 40%, #4b2a7a 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Decorative glowing blobs */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.6;
+  z-index: 0;
+}
+body::before {
+  width: 400px;
+  height: 400px;
+  background: #8b5cf6;
+  top: -100px;
+  left: -100px;
+}
+body::after {
+  width: 500px;
+  height: 500px;
+  background: #c084fc;
+  bottom: -150px;
+  right: -150px;
+}
+
+/* Glass card */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 850px;
+  padding: 45px 40px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  color: #f3e8ff;
+}
+
+/* Header / profile row */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+
+.photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(196, 132, 252, 0.6);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.7);
+  flex-shrink: 0;
+}
+
+.header-text h1 {
+  font-size: 2rem;
+  background: linear-gradient(90deg, #e9d5ff, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 6px;
+}
+
+.header-text .role {
+  font-size: 1.05rem;
+  color: #d8b4fe;
+  letter-spacing: 0.5px;
+}
+
+.header-text .contact {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #cbb6e8;
+  line-height: 1.6;
+}
+
+/* Sections */
+section {
+  margin-bottom: 28px;
+}
+
+section h2 {
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #c084fc;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(196, 132, 252, 0.35);
+}
+
+section p,
+section li {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #e9ddf7;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+ul li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: #c084fc;
+}
+
+/* Skill pills */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: rgba(192, 132, 252, 0.15);
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  color: #e9d5ff;
+  transition: 0.25s;
+}
+
+.skill:hover {
+  background: rgba(192, 132, 252, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .card {
+    padding: 30px 22px;
+  }
+  .header-text h1 {
+    font-size: 1.6rem;
+  }
+}
