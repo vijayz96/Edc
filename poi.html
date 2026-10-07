@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live World Clock · Different Countries & Regions</title>
+    <!-- Link the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="clock-container">
+
+        <!-- ===== HEADER SECTION ===== -->
+        <header class="page-header">
+            <h1>🌍 Live World Clock</h1>
+            <p class="subhead">Current time around the globe — updates every second</p>
+
+            <!-- Local time card -->
+            <div class="local-time-card">
+                <span class="label">Your Local Time</span>
+                <span id="localTime" class="time-large">--:--:--</span>
+                <span id="localDate" class="date-small">—</span>
+            </div>
+        </header>
+
+        <!-- ===== GRID OF WORLD CLOCKS ===== -->
+        <section class="clock-grid">
+
+            <!-- New York -->
+            <article class="clock-card">
+                <div class="card-header">
+                    <span class="country">🇺🇸 United States</span>
+                    <span class="region">New York</span>
+                </div>
+                <div class="time-display" id="time-newyork">--:--:--</div>
+                <div class="date-display" id="date-newyork">—</div>
+                <div class="zone-info">Eastern Time (EST/EDT)</div>
+            </article>
+
+            <!-- London -->
+            <article class="clock-card">
+                <div class="card-header">
+                    <span class="country">🇬🇧 United Kingdom</span>
+                    <span class="region">London</span>
+                </div>
+                <div class="time-display" id="time-london">--:--:--</div>
+                <div class="date-display" id="date-london">—</div>
+                <div class="zone-info">Greenwich Mean Time (GMT/BST)</div>
+            </article>
+
+            <!-- Tokyo -->
+            <article class="clock-card">
+                <div class="card-header">
+                    <span class="country">🇯🇵 Japan</span>
+                    <span class="region">Tokyo</span>
+                </div>
+                <div class="time-display" id="time-tokyo">--:--:--</div>
+                <div class="date-display" id="date-tokyo">—</div>
+                <div class="zone-info">Japan Standard Time (JST)</div>
+            </article>
+
+            <!-- Sydney -->
+            <article class="clock-card">
+                <div class="card-header">
+                    <span class="country">🇦🇺 Australia</span>
+                    <span class="region">Sydney</span>
+                </div>
+                <div class="time-display" id="time-sydney">--:--:--</div>
+                <div class="date-display" id="date-sydney">—</div>
+                <div class="zone-info">Australian Eastern Time (AEST/AEDT)</div>
+            </article>
+
+            <!-- Dubai -->
+            <article class="clock-card">
+                <div class="card-header">
+                    <span class="country">🇦🇪 UAE</span>
+                    <span class="region">Dubai</span>
+                </div>
+                <div class="time-display" id="time-dubai">--:--:--</div>
+                <div class="date-display" id="date-dubai">—</div>
+                <div class="zone-info">Gulf Standard Time (GST)</div>
+            </article>
+
+            <!-- Los Angeles -->
+            <article class="clock-card">
+                <div class="card-header">
+                    <span class="country">🇺🇸 United States</span>
+                    <span class="region">Los Angeles</span>
+                </div>
+                <div class="time-display" id="time-la">--:--:--</div>
+                <div class="date-display" id="date-la">—</div>
+                <div class="zone-info">Pacific Time (PST/PDT)</div>
+            </article>
+
+            <!-- Paris -->
+            <article class="clock-card">
+                <div class="card-header">
+                    <span class="country">🇫🇷 France</span>
+                    <span class="region">Paris</span>
+                </div>
+                <div class="time-display" id="time-paris">--:--:--</div>
+                <div class="date-display" id="date-paris">—</div>
+                <div class="zone-info">Central European Time (CET/CEST)</div>
+            </article>
+
+            <!-- Moscow -->
+            <article class="clock-card">
+                <div class="card-header">
+                    <span class="country">🇷🇺 Russia</span>
+                    <span class="region">Moscow</span>
+                </div>
+                <div class="time-display" id="time-moscow">--:--:--</div>
+                <div class="date-display" id="date-moscow">—</div>
+                <div class="zone-info">Moscow Standard Time (MSK)</div>
+            </article>
+
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="page-footer">
+            <p>⏱️ Live clocks update every second · Times may vary due to Daylight Saving</p>
+        </footer>
+
+    </main>
+
+    <!-- ===== JAVASCRIPT FOR LIVE CLOCK ===== -->
+    <script>
+        (function () {
+            // Format time as HH:MM:SS (24-hour)
+            function formatTime(date) {
+                const h = String(date.getHours()).padStart(2, '0');
+                const m = String(date.getMinutes()).padStart(2, '0');
+                const s = String(date.getSeconds()).padStart(2, '0');
+                return `${h}:${m}:${s}`;
+            }
+
+            // Format date as "Wed, Oct 8, 2025"
+            function formatDate(date) {
+                return date.toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+            }
+
+            // Timezone map for each region
+            const timezoneMap = {
+                'newyork': 'America/New_York',
+                'london':  'Europe/London',
+                'tokyo':   'Asia/Tokyo',
+                'sydney':  'Australia/Sydney',
+                'dubai':   'Asia/Dubai',
+                'la':      'America/Los_Angeles',
+                'paris':   'Europe/Paris',
+                'moscow':  'Europe/Moscow'
+            };
+
+            function updateAllClocks() {
+                const now = new Date();
+
+                // 1. Local time
+                const localTimeEl = document.getElementById('localTime');
+                const localDateEl = document.getElementById('localDate');
+                if (localTimeEl) localTimeEl.textContent = formatTime(now);
+                if (localDateEl) localDateEl.textContent = formatDate(now);
+
+                // 2. Each region
+                for (const [region, tz] of Object.entries(timezoneMap)) {
+                    const timeEl = document.getElementById(`time-${region}`);
+                    const dateEl = document.getElementById(`date-${region}`);
+                    if (!timeEl || !dateEl) continue;
+
+                    try {
+                        const timeString = now.toLocaleTimeString('en-US', {
+                            timeZone: tz,
+                            hour12: false,
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                        });
+
+                        const dateString = now.toLocaleDateString('en-US', {
+                            timeZone: tz,
+                            weekday: 'short',
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                        });
+
+                        timeEl.textContent = timeString;
+                        dateEl.textContent = dateString;
+                    } catch (e) {
+                        timeEl.textContent = '--:--:--';
+                        dateEl.textContent = 'Timezone error';
+                    }
+                }
+            }
+
+            updateAllClocks();
+            setInterval(updateAllClocks, 1000);
+        })();
+    </script>
+
+</body>
+</html>
