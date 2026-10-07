@@ -1,0 +1,280 @@
+/* =========================================================
+   LIVE WORLD CLOCK — style.css
+   ========================================================= */
+
+/* ---------- RESET & BASE ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    background-attachment: fixed;
+    color: #e2e8f0;
+    min-height: 100vh;
+    padding: 40px 20px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- MAIN CONTAINER ---------- */
+.clock-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;                /* space between header, grid, footer */
+}
+
+/* ---------- HEADER SECTION ---------- */
+.page-header {
+    text-align: center;
+    padding: 30px 20px 10px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #38bdf8, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.subhead {
+    font-size: 1rem;
+    color: #94a3b8;
+    margin-bottom: 30px;
+    letter-spacing: 0.3px;
+}
+
+/* ---------- LOCAL TIME CARD ---------- */
+.local-time-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 25px 50px;
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(56, 189, 248, 0.15);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.local-time-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(56, 189, 248, 0.25);
+}
+
+.local-time-card .label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #38bdf8;
+    font-weight: 600;
+}
+
+.time-large {
+    font-size: 2.8rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: #f1f5f9;
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    letter-spacing: 2px;
+}
+
+.date-small {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+}
+
+/* ---------- CLOCK GRID ---------- */
+.clock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 10px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ---------- INDIVIDUAL CLOCK CARD ---------- */
+.clock-card {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.clock-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.clock-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
+}
+
+.clock-card:hover::before {
+    opacity: 1;
+}
+
+/* ---------- CARD HEADER (country + region) ---------- */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    gap: 8px;
+}
+
+.card-header .country {
+    font-weight: 600;
+    color: #cbd5e1;
+}
+
+.card-header .region {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-style: italic;
+    text-align: right;
+}
+
+/* ---------- TIME DISPLAY ---------- */
+.time-display {
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: #38bdf8;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 6px 0;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    transition: color 0.3s ease;
+}
+
+.clock-card:hover .time-display {
+    color: #7dd3fc;
+}
+
+/* ---------- DATE DISPLAY ---------- */
+.date-display {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+/* ---------- ZONE INFO ---------- */
+.zone-info {
+    font-size: 0.75rem;
+    color: #475569;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(148, 163, 184, 0.1);
+}
+
+/* ---------- FOOTER ---------- */
+.page-footer {
+    text-align: center;
+    padding: 20px 10px 10px;
+    color: #64748b;
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .time-large {
+        font-size: 2.1rem;
+    }
+
+    .local-time-card {
+        padding: 18px 28px;
+    }
+
+    .time-display {
+        font-size: 1.8rem;
+    }
+
+    .clock-grid {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .card-header .region {
+        text-align: left;
+    }
+}
